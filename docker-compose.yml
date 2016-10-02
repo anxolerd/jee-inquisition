@@ -1,0 +1,13 @@
+version: '2'
+services:
+  db:
+    image: postgres
+  app:
+    build: .
+    command: sh -c "./gradlew test --info ; cd /inquisition/build/reports/tests ; python -m SimpleHTTPServer"
+    volumes:
+      - .:/inquisition
+    depends_on:
+      - db
+    ports:
+      - '8000:8000'
