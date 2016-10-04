@@ -68,6 +68,7 @@ public class InterestRepo {
             }
         } catch (SQLException e) {
             logger.error(e.getMessage(), e);
+            throw new RuntimeException(e.getMessage(), e);
         } finally {
             pool.releaseConection(conn);
         }
@@ -91,6 +92,7 @@ public class InterestRepo {
             }
         } catch (SQLException e) {
             logger.error(e.getMessage(), e);
+            throw new RuntimeException(e.getMessage(), e);
         } finally {
             pool.releaseConection(conn);
         }
@@ -112,6 +114,7 @@ public class InterestRepo {
             if (rowsAffected > 0) { returnVal = true; }
         } catch (SQLException e) {
             logger.error(e.getMessage(), e);
+            throw new RuntimeException(e.getMessage(), e);
         } finally {
             pool.releaseConection(conn);
         }
@@ -129,6 +132,7 @@ public class InterestRepo {
             if (rowsAffected > 0) { success = true; }
         } catch (SQLException e) {
             logger.error(e.getMessage(), e);
+            throw new RuntimeException(e.getMessage(), e);
         } finally {
             pool.releaseConection(conn);
         }
@@ -153,6 +157,7 @@ public class InterestRepo {
             }
         } catch (SQLException e) {
             logger.error(e.getMessage(), e);
+            throw new RuntimeException(e.getMessage(), e);
         } finally {
             pool.releaseConection(conn);
         }
@@ -167,6 +172,7 @@ public class InterestRepo {
             stmt.executeUpdate();
         } catch (SQLException e) {
             logger.error(e.getMessage(), e);
+            throw new RuntimeException(e.getMessage(), e);
         } finally {
             pool.releaseConection(conn);
         }
@@ -180,6 +186,7 @@ public class InterestRepo {
             stmt.executeUpdate();
         } catch (SQLException e) {
             logger.error(e.getMessage(), e);
+            throw new RuntimeException(e.getMessage(), e);
         } finally {
             pool.releaseConection(conn);
         }
@@ -202,6 +209,7 @@ public class InterestRepo {
             }
         } catch (SQLException e) {
             logger.error(e.getMessage(), e);
+            throw new RuntimeException(e.getMessage(), e);
         } finally {
             pool.releaseConection(conn);
         }
