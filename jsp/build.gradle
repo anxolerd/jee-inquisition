@@ -1,0 +1,42 @@
+group 'edu.anxolerd.inquisition'
+version '0.0.1'
+
+apply plugin: 'java'
+apply plugin: 'war'
+
+sourceCompatibility = 1.8
+
+task jardeps(type: Jar) {
+    manifest {
+        attributes 'Implementation-Title': 'Gradle Jar File',
+                   'Implementation-Version': version,
+                   'Main-Class': 'edu.anxolerd.inquisition.jsp'
+    }
+    baseName = project.name + '-all'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
+
+war {
+    from 'src/main/java'
+    webInf { from 'src/WEB-INF' }
+    from('src/main/jsp/interest') {
+        include '*.jsp'
+        into('jsp/interest')
+    }
+    from('src/main/jsp/person') {
+        include '*.jsp'
+        into('jsp/person')
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile 'junit:junit:4.11'
+    compile project(':core')
+    compile 'javax.servlet:javax.servlet-api:3.0.1'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.0.1'
+}
