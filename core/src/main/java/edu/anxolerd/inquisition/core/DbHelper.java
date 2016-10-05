@@ -22,11 +22,11 @@ public class DbHelper {
         "  person_id UUID NOT NULL,\n" +
         "  interest_id UUID NOT NULL\n" +
         ");\n" +
-        "ALTER TABLE m2m_person_interest ADD CONSTRAINT IF NOT EXISTS m2m_person_interest_person_id_fk\n" +
+        "ALTER TABLE m2m_person_interest ADD CONSTRAINT m2m_person_interest_person_id_fk\n" +
         "  FOREIGN KEY (person_id) REFERENCES person(id) ON DELETE CASCADE;\n" +
-        "ALTER TABLE m2m_person_interest ADD CONSTRAINT IF NOT EXISTS m2m_person_interest_interest_id_fk\n" +
+        "ALTER TABLE m2m_person_interest ADD CONSTRAINT m2m_person_interest_interest_id_fk\n" +
         "  FOREIGN KEY (interest_id) REFERENCES interest(id) ON DELETE CASCADE;\n" +
-        "ALTER TABLE m2m_person_interest ADD CONSTRAINT IF NOT EXISTS m2m_person_interest_person_id_interest_id_ix\n" +
+        "ALTER TABLE m2m_person_interest ADD CONSTRAINT m2m_person_interest_person_id_interest_id_ix\n" +
         "  UNIQUE (person_id, interest_id);\n" +
         "CREATE OR REPLACE FUNCTION calc_sin_rate(person_id UUID) RETURNS INTEGER AS $$\n" +
         "  SELECT " +
@@ -45,7 +45,7 @@ public class DbHelper {
         "  verdict INTEGER,\n" +
         "  sentence TEXT\n" +
         ");\n" +
-        "ALTER TABLE \"case\" ADD CONSTRAINT IF NOT EXISTS case_suspect_person_id_fk " +
+        "ALTER TABLE \"case\" ADD CONSTRAINT case_suspect_person_id_fk " +
         "  FOREIGN KEY (suspect_person_id) REFERENCES person(id);\n"
     );
 

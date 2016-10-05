@@ -17,7 +17,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 import static org.junit.Assert.*;
@@ -187,5 +189,33 @@ public class PersonRepoTest {
 
         int sinRate = personRepo.getSinRate(person.getId());
         assertEquals(205, sinRate);
+    }
+
+    @Test
+    public void testGetAll() throws Exception {
+        final String FIRST_NAME = "John";
+        final String LAST_NAME = "Doe";
+        final DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        final Date BIRTH_DATE = df.parse("1517-11-08");
+
+        List<Person> persons = new ArrayList<>();
+        persons.add(personRepo.create(
+            new Person()
+            .setFirstName(FIRST_NAME)
+            .setLastName(LAST_NAME)
+            .setBirthDate(BIRTH_DATE)
+        ));
+        persons.add(personRepo.create(
+            new Person()
+            .setFirstName("Vladimir")
+            .setMiddleName("Ilyich")
+            .setLastName("Lenin")
+            .setBirthDate(df.parse("1870-04-22"))
+            .setDeathDate(df.parse("1921-01-21"))
+        ));
+
+        List<Person> allPersons = personRepo.getAll();
+        assertEquals(persons.size(), allPersons.size());
+        assertTrue(allPersons.containsAll(persons));
     }
 }
