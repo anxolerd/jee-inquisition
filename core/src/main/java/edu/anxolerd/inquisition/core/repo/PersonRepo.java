@@ -7,6 +7,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class PersonRepo {
@@ -30,7 +32,10 @@ public class PersonRepo {
         "WHERE id=?;"
     );
     private static final String SQL_DELETE = "DELETE FROM person WHERE id=?;";
-
+    public static final String SQL_GET_ALL = (
+        "SELECT id, first_name, middle_name, last_name, birth_date, death_date\n" +
+        "FROM person\n;"
+    );
 
     public PersonRepo(ConnectionPoolWrapper pool) {
         this.pool = pool;
@@ -157,5 +162,35 @@ public class PersonRepo {
             pool.releaseConection(conn);
         }
         return sinRate;
+    }
+
+    public List<Person> getAll() {
+        Connection conn = pool.getConnection();
+
+        List<Person> persons = new ArrayList<>();
+        try (Statement stmt = conn.createStatement()) {
+            ResultSet rs = stmt.executeQuery(SQL_GET_ALL);
+            while (rs.next()) {
+                persons.add(new Person()
+                    .setId((UUID) rs.getObject("id"))
+                    .setFirstName(rs.getString("first_name"))
+                    .setMiddleName(rs.getString("middle_name"))
+                    .setLastName(rs.getString("last_name"))
+                    .setBirthDate(new java.util.Date(rs.getDate("birth_date").getTime()))
+                    .setDeathDate(
+                        rs.getDate("death_date") != null
+                        ? new java.util.Date(rs.getDate("death_date").getTime())
+                        : null
+                    )
+                );
+            }
+        } catch (SQLException e) {
+            logger.error(e.getMessage(), e);
+            throw new RuntimeException(e.getMessage(), e);
+        } finally {
+            pool.releaseConection(conn);
+        }
+
+        return persons;
     }
 }
