@@ -106,4 +106,14 @@
         <servlet-name>PersonCreateServlet</servlet-name>
         <url-pattern>/persons/new</url-pattern>
     </servlet-mapping>
+
+    <!-- Root -->
+    <servlet>
+        <servlet-name>RootIndex</servlet-name>
+        <jsp-file>/jsp/index.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RootIndex</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
 </web-app>

@@ -28,6 +28,10 @@ war {
         include '*.jsp'
         into('jsp/person')
     }
+    from('src/main/jsp/') {
+        include '*.jsp'
+        into('jsp')
+    }
 }
 
 repositories {
