@@ -10,7 +10,18 @@ repositories {
     mavenCentral()
 }
 
+war {
+    from 'src/main/java'
+    webInf { from 'src/main/webapp/WEB-INF' }
+}
+
 dependencies {
+    providedCompile group:'javax.servlet', name:'servlet-api', version: '2.5'
+
+    compile group: 'com.sun.faces', name: 'jsf-api', version: '2.2.8'
+    compile group: 'com.sun.faces', name: 'jsf-impl', version: '2.2.8'
+    compile group: 'org.primefaces', name: 'primefaces', version: '6.0'
+    compile group: 'javax.servlet', name: 'jstl', version: '1.2'
     compile group: 'org.hibernate', name: 'hibernate-core', version:'5.2.3.Final'
     testCompile group: 'junit', name: 'junit', version: '4.11'
 }
