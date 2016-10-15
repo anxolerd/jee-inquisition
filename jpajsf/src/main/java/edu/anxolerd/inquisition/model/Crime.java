@@ -1,17 +1,33 @@
 package edu.anxolerd.inquisition.model;
 
 
+import org.hibernate.annotations.ColumnDefault;
+
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
+
+@Entity
+@Table(name = "crime")
 public class Crime implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    @Id
+    @GeneratedValue
     private long id;
+
+    @Column(nullable = false)
     private String title;
+    @Column
     private String description;
 
+    @Temporal(TemporalType.TIMESTAMP)
+    @ColumnDefault("now()")
+    @Column(name = "exists_since", nullable = false)
     private Date existsSince;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "exists_until")
     private Date existsUntil;
 
     public Crime() {}

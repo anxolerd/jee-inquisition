@@ -1,13 +1,23 @@
 package edu.anxolerd.inquisition.model;
 
 
+import javax.persistence.*;
 import java.io.Serializable;
 
+@Entity
+@Table(name = "inquisitor")
 public class Inquisitor implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    @Id
+    @GeneratedValue
     private long id;
+
+    @OneToOne(targetEntity = Person.class)
+    @JoinColumn(name = "person_id")
     private Person person;
+
+    @Column
     private String codename;
 
     public Inquisitor() {}

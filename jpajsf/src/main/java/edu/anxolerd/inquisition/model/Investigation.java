@@ -1,26 +1,50 @@
 package edu.anxolerd.inquisition.model;
 
 
+import org.hibernate.annotations.ColumnDefault;
+
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 
+@Entity
+@Table(name = "investigation")
 public class Investigation implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    @Id
+    @GeneratedValue
     private long id;
+
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Inquisitor.class)
+    @JoinColumn(name = "assignee_inquisitor_id", nullable = false, referencedColumnName = "id")
     private Inquisitor assigneeInquisitor;
+    @Temporal(TemporalType.TIMESTAMP)
+    @ColumnDefault("now()")
+    @Column(name = "date_opened", nullable = false)
     private Date dateOpened;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "date_closed")
     private Date dateClosed;
 
+    @ManyToOne(targetEntity = Person.class)
+    @JoinColumn(name = "suspect_person_id", nullable = false, referencedColumnName = "id")
     private Person suspectPerson;
+    @ManyToMany(targetEntity = Crime.class)
+    @JoinTable(name = "m2m_investigation_crime")
     private List<Crime> crimes;
 
+    @OneToMany(targetEntity = InvestigationNote.class, fetch = FetchType.LAZY, mappedBy = "investigation")
     private List<InvestigationNote> notes;
+    @OneToMany(targetEntity = InvestigationLogRecord.class, fetch = FetchType.LAZY, mappedBy = "investigation")
     private List<InvestigationLogRecord> logs;
 
+    @Column
+    @Enumerated(EnumType.STRING)
     private InvestigationVerdict verdict;
+    @Column
     private String sentence;
 
     public Investigation() {}

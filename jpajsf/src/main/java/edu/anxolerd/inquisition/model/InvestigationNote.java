@@ -1,24 +1,37 @@
 package edu.anxolerd.inquisition.model;
 
 
+import javax.persistence.*;
 import java.io.Serializable;
 
+@Entity
+@Table(name = "investigation_note")
 public class InvestigationNote implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    @Id
+    @GeneratedValue
     private long id;
 
+    @ManyToOne(targetEntity = Inquisitor.class, fetch = FetchType.LAZY)
+    @JoinColumn(name = "author_inquisitor_id",  nullable = false)
     private Inquisitor authorInquisitor;
+    @Column(nullable = false)
     private String title;
+    @Column(nullable = false)
     private String text;
+    @ManyToOne(targetEntity = Investigation.class)
+    @JoinColumn(name = "investigation_id", nullable = false)
+    private Investigation investigation;
 
     public InvestigationNote() {}
 
-    public InvestigationNote(long id, Inquisitor authorInquisitor, String title, String text) {
+    public InvestigationNote(long id, Inquisitor authorInquisitor, String title, String text, Investigation investigation) {
         this.id = id;
         this.authorInquisitor = authorInquisitor;
         this.title = title;
         this.text = text;
+        this.investigation = investigation;
     }
 
     public long getId() {
@@ -54,6 +67,15 @@ public class InvestigationNote implements Serializable {
 
     public InvestigationNote setText(String text) {
         this.text = text;
+        return this;
+    }
+
+    public Investigation getInvestigation() {
+        return investigation;
+    }
+
+    public InvestigationNote setInvestigation(Investigation investigation) {
+        this.investigation = investigation;
         return this;
     }
 }

@@ -1,34 +1,54 @@
 package edu.anxolerd.inquisition.model;
 
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+
+@Entity
+@Table(name = "person")
 public class Person implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    @Id
+    @GeneratedValue
     private long id;
 
+    @Column(name = "first_name", nullable = false)
     private String firstName;
+    @Column(name = "middle_name")
     private String middleName;
+    @Column(name = "last_name", nullable = false)
     private String lastName;
 
-    private String documentId;
+    @Column(nullable = false)
+    private String document;
 
+    @Temporal(TemporalType.DATE)
+    @Column(name = "birth_date", nullable = false)
     private Date birthDate;
+    @Temporal(TemporalType.DATE)
+    @Column(name = "death_date")
     private Date deathDate;
 
+    @OneToMany(targetEntity = PersonNote.class, fetch = FetchType.LAZY)
     private List<PersonNote> notes;
+
+    @OneToOne(targetEntity = ContactInfo.class)
+    @JoinColumn(name = "contact_info_id", nullable = false)
     private ContactInfo contactInfo;
 
+    @ManyToMany(targetEntity = Interest.class, fetch = FetchType.LAZY)
+    @JoinTable(name = "m2m_person_interest")
     private List<Interest> interests;
 
     public Person() {}
 
     public Person(
         long id, String firstName, String middleName, String lastName,
-        String documentId, Date birthDate, Date deathDate,
+        String document, Date birthDate, Date deathDate,
         List<PersonNote> notes, ContactInfo contactInfo,
         List<Interest> interests
     ) {
@@ -36,7 +56,7 @@ public class Person implements Serializable {
         this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastName;
-        this.documentId = documentId;
+        this.document = document;
         this.birthDate = birthDate;
         this.deathDate = deathDate;
         this.notes = notes;
@@ -80,12 +100,12 @@ public class Person implements Serializable {
         return this;
     }
 
-    public String getDocumentId() {
-        return documentId;
+    public String getDocument() {
+        return document;
     }
 
-    public Person setDocumentId(String documentId) {
-        this.documentId = documentId;
+    public Person setDocument(String document) {
+        this.document = document;
         return this;
     }
 

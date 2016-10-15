@@ -1,22 +1,39 @@
 package edu.anxolerd.inquisition.model;
 
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
 
+@Entity
+@Table(name = "contact_info")
 public class ContactInfo implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    @Id
+    @GeneratedValue
     private long id;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "home_address_id")
     private Address homeAddress;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "work_address_id")
     private Address workAddress;
+
+    @ManyToMany(targetEntity = Address.class, fetch = FetchType.LAZY)
+    @JoinTable(name = "m2m_contact_info_address")
     private List<Address> otherAddresses;
 
+    @OneToOne(targetEntity = Person.class, fetch = FetchType.EAGER)
+    @JoinColumn(name = "person_id")
     private Person person;
 
+    @OneToMany(targetEntity = EmailRecord.class, fetch = FetchType.LAZY, mappedBy = "contactInfo")
     private List<EmailRecord> emails;
+    @OneToMany(targetEntity = PhoneRecord.class, fetch = FetchType.LAZY, mappedBy = "contactInfo")
     private List<PhoneRecord> phones;
 
     public ContactInfo() {}

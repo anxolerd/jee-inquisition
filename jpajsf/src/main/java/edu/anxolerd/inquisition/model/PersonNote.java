@@ -1,14 +1,25 @@
 package edu.anxolerd.inquisition.model;
 
+import javax.persistence.*;
 import java.io.Serializable;
 
 
+@Entity
+@Table(name = "person_note")
 public class PersonNote implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    @Id
+    @GeneratedValue
     private long id;
+
+    @ManyToOne(targetEntity = Inquisitor.class, fetch = FetchType.LAZY)
+    @JoinColumn(name = "author_inquisitor_id", nullable = false, referencedColumnName = "id")
     private Inquisitor authorInquisitor;
+    @ManyToOne(targetEntity = Person.class, fetch = FetchType.LAZY)
+    @JoinColumn(name = "person_id", nullable = false, referencedColumnName = "id")
     private Person person;
+    @Column(nullable = false)
     private String text;
 
     public PersonNote() {}

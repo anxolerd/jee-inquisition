@@ -1,21 +1,32 @@
 package edu.anxolerd.inquisition.model;
 
 
+import javax.persistence.*;
 import java.io.Serializable;
 
-
+@Entity
+@Table(name = "address")
 public class Address implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    @Id
+    @GeneratedValue
     private long id;
 
+    @Column
     private String country;
+    @Column
     private String region;
+    @Column
     private String city;
 
+    @Column
     private String street;
+    @Column
     private int building;
+    @Column
     private int apartment;
+    @Column(name = "postal_code")
     private String postalCode;
 
     public Address() {}
