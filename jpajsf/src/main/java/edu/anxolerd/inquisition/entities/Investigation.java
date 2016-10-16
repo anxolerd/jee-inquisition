@@ -1,4 +1,4 @@
-package edu.anxolerd.inquisition.model;
+package edu.anxolerd.inquisition.entities;
 
 
 import org.hibernate.annotations.ColumnDefault;

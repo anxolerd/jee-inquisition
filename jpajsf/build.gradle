@@ -16,9 +16,9 @@ war {
 }
 
 dependencies {
-    providedCompile group:'javax.servlet', name:'servlet-api', version: '2.5'
+    providedCompile group:'javax.servlet', name:'servlet-services', version: '2.5'
 
-    compile group: 'com.sun.faces', name: 'jsf-api', version: '2.2.8'
+    compile group: 'com.sun.faces', name: 'jsf-services', version: '2.2.8'
     compile group: 'com.sun.faces', name: 'jsf-impl', version: '2.2.8'
     compile group: 'org.primefaces', name: 'primefaces', version: '6.0'
     compile group: 'javax.servlet', name: 'jstl', version: '1.2'
