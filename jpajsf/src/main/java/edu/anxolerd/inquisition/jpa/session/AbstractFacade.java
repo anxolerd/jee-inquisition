@@ -14,19 +14,15 @@ public abstract class AbstractFacade<T> {
         this.entityClass = entityClass;
     }
 
-    protected EntityManager getEntityManager() {
-        return PersistenceUtil.getEntityManager();
-    };
-
     public void create(T entity) {
-        getEntityManager().persist(entity);
+        PersistenceUtil.getEntityManager().persist(entity);
     }
 
     public T edit(T entity) {
-        return getEntityManager().merge(entity);
+        return PersistenceUtil.getEntityManager().merge(entity);
     }
 
     public void remove(T entity) {
-        getEntityManager().remove(getEntityManager().merge(entity));
+        PersistenceUtil.getEntityManager().remove(PersistenceUtil.getEntityManager().merge(entity));
     }
 }
