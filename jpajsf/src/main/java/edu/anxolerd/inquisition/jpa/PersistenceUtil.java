@@ -11,7 +11,7 @@ public class PersistenceUtil {
 
     private static EntityManagerFactory getEntityManagerFactory() {
         if (entityManagerFactory == null) {
-            entityManagerFactory = Persistence.createEntityManagerFactory("WSInquisitionPU");
+            entityManagerFactory = Persistence.createEntityManagerFactory("edu.anxolerd.inquisition");
         }
         return entityManagerFactory;
     }
