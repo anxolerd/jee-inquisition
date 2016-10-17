@@ -5,25 +5,30 @@
     xmlns="http://xmlns.jcp.org/xml/ns/persistence"
     xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
 >
-    <persistence-unit name="WSInquisition" transaction-type="JTA">
+    <persistence-unit name="WSInquisitionPU" transaction-type="JTA">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-        <jta-data-source>jdbc/wsinquisition</jta-data-source>
 
         <!-- List all entity classes -->
-        <class>edu.anxolerd.inquisition.entities.Address</class>
-        <class>edu.anxolerd.inquisition.entities.ContactInfo</class>
-        <class>edu.anxolerd.inquisition.entities.Crime</class>
-        <class>edu.anxolerd.inquisition.entities.EmailRecord</class>
-        <class>edu.anxolerd.inquisition.entities.Inquisitor</class>
-        <class>edu.anxolerd.inquisition.entities.Interest</class>
-        <class>edu.anxolerd.inquisition.entities.Investigation</class>
-        <class>edu.anxolerd.inquisition.entities.InvestigationLogRecord</class>
-        <class>edu.anxolerd.inquisition.entities.InvestigationNote</class>
-        <class>edu.anxolerd.inquisition.entities.Person</class>
-        <class>edu.anxolerd.inquisition.entities.PersonNote</class>
-        <class>edu.anxolerd.inquisition.entities.PhoneRecord</class>
+        <class>edu.anxolerd.inquisition.jpa.entities.Address</class>
+        <class>edu.anxolerd.inquisition.jpa.entities.ContactInfo</class>
+        <class>edu.anxolerd.inquisition.jpa.entities.Crime</class>
+        <class>edu.anxolerd.inquisition.jpa.entities.EmailRecord</class>
+        <class>edu.anxolerd.inquisition.jpa.entities.Inquisitor</class>
+        <class>edu.anxolerd.inquisition.jpa.entities.Interest</class>
+        <class>edu.anxolerd.inquisition.jpa.entities.Investigation</class>
+        <class>edu.anxolerd.inquisition.jpa.entities.InvestigationLogRecord</class>
+        <class>edu.anxolerd.inquisition.jpa.entities.InvestigationNote</class>
+        <class>edu.anxolerd.inquisition.jpa.entities.Person</class>
+        <class>edu.anxolerd.inquisition.jpa.entities.PersonNote</class>
+        <class>edu.anxolerd.inquisition.jpa.entities.PhoneRecord</class>
 
         <properties>
+            <property name="hibernate.connection.url" value="jdbc:postgresql://localhost/wsinquisition"/>
+            <property name="hibernate.connection.driver_class" value="org.postgresql.Driver"/>
+            <property name="hibernate.connection.username" value="postgres"/>
+            <property name="hibernate.connection.password" value="postgres"/>
+
+
             <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
             <property name="javax.persistence.schema-generation.create-source" value="script"/>
             <property name="javax.persistence.schema-generation.drop-source" value="script"/>

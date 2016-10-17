@@ -1,4 +1,4 @@
-package edu.anxolerd.inquisition.entities;
+package edu.anxolerd.inquisition.jpa.entities;
 
 
 import javax.persistence.*;
