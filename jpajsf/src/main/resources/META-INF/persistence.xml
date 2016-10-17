@@ -26,8 +26,8 @@
         <properties>
             <property name="hibernate.connection.url" value="jdbc:postgresql://localhost/wsinquisition"/>
             <property name="hibernate.connection.driver_class" value="org.postgresql.Driver"/>
-            <property name="hibernate.connection.username" value="alek"/>
-            <property name="hibernate.connection.password" value=""/>
+            <property name="hibernate.connection.username" value="postgres"/>
+            <property name="hibernate.connection.password" value="postgres"/>
 
 
             <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
