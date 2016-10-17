@@ -8,12 +8,19 @@
       xmlns:inquisition="http://anxolerd.edu/facelets">
 <f:view>
     <h:outputLabel value="Hello, world"/>
+
+    <!-- This is custom tag for testing purposes -->
     <inquisition:button
         buttonSubmitLabel="Submit"
         buttonResetLabel="Reset" />
 
-    <h:commandButton
-        value="TEST"
-        onclick="#{InterestService.create()}"/>
+    <!-- Actual thing that should work -->
+    <h:form>
+        <h:commandButton
+            value="Create interest"
+            type="submit"
+            action="#{InterestService.create()}"
+        />
+    </h:form>
 </f:view>
 </html>
