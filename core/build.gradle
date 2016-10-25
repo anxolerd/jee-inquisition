@@ -22,7 +22,7 @@ task fatJar(type: Jar) {
 
 dependencies {
     compile 'org.postgresql:postgresql:9.4.1211'
-    compile 'org.slf4j:slf4j-api:1.7.13'
+    compile 'org.slf4j:slf4j-services:1.7.13'
     compile 'org.slf4j:slf4j-simple:1.7.10'
 
     testCompile 'junit:junit:4.11'
